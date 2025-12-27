@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Urban Vision – Infrastructure Audit</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #eef2f6;
+      color: #222;
+    }
+
+    .topbar {
+      background: #0b132b;
+      color: #fff;
+      padding: 18px 28px;
+      display: flex;
+      align-items: center;
+    }
+
+    .topbar h1 {
+      font-size: 20px;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px 60px;
+    }
+
+    .upload-box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .upload-box h2 {
+      margin-top: 0;
+    }
+
+    .upload-box input[type="file"] {
+      margin-top: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 12px 22px;
+      background: #f1c40f;
+      color: #111;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .btn.dark {
+      background: #0b132b;
+      color: #fff;
+      font-weight: normal;
+    }
+
+    .results {
+      margin-top: 40px;
+    }
+
+    .compare {
+      display: flex;
+      gap: 24px;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+
+    .compare div {
+      width: 48%;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .compare h3 {
+      margin-top: 0;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    .compare img {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .caption {
+      font-size: 13px;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    .summary {
+      background: #0b132b;
+      color: #fff;
+      padding: 22px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+    }
+
+    .summary h3 {
+      margin-top: 0;
+    }
+
+    .report {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+      max-height: 380px;
+      overflow-y: auto;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .exports {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer {
+      margin-top: 60px;
+      padding: 20px;
+      text-align: center;
+      font-size: 13px;
+      color: #cbd5e1;
+      background: #0b132b;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <h1>URBAN VISION AI</h1>
+  </div>
+
+  <div class="container">
+
+    <div class="upload-box">
+      <h2>Urban Infrastructure Audit & Visualization</h2>
+      <p>Upload a street image to generate an AI-assisted urban audit.</p>
+
+      <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required>
+        <br>
+        <button class="btn" type="submit">Analyze Image</button>
+      </form>
+    </div>
+
+    {% if before_image %}
+    <div class="results">
+
+      <div class="compare">
+        <div>
+          <h3>ORIGINAL STATE</h3>
+          <img src="{{ before_image }}">
+        </div>
+
+        <div>
+          <h3>VISION RESTORATION</h3>
+
+          {% if after_image %}
+            <img src="{{ after_image }}">
+          {% else %}
+            <p style="color:#888; font-size:14px;">
+              No enhanced visualization available for this image.
+            </p>
+          {% endif %}
+
+          <div class="caption">
+            Generated using Gemini AI (Studio)
+          </div>
+          <a href="/download/image" class="btn">Save High-Res Vision</a>
+        </div>
+      </div>
+
+      <div class="summary">
+        <h3>Image Description</h3>
+        <p>{{ report.split('\n')[0] if report else "" }}</p>
+      </div>
+
+      <div class="report">
+        <h3>Audit Report</h3>
+        <pre>{{ report }}</pre>
+      </div>
+
+      <div class="exports">
+        <a href="/download/report" class="btn dark">
+          Export Shareable Report (PDF)
+        </a>
+      </div>
+
+    </div>
+    {% endif %}
+
+  </div>
+
+  <footer class="footer">
+    <div>
+      <strong>Team Urban Vision (IOT)</strong><br>
+      Aarohi · Ajay · Alok · Divyansh<br>
+      Powered by Google Gemini
+    </div>
+  </footer>
+
+</body>
+</html>
