@@ -1,5 +1,4 @@
-<img width="1908" height="195" alt="image" src="https://github.com/user-attachments/assets/7576bd2b-3b38-478c-ba00-274ffa2b37e6" />## Urban Vision AI
-
+## Urban Vision A
 **AI-assisted Urban Infrastructure Audit & Restoration Tool**
 
 Urban Vision is a desktop-based web application that uses Google Gemini’s multimodal AI to analyze urban street images and generate structured infrastructure audit reports.  
