@@ -1,4 +1,4 @@
-## Urban Vision AI
+<img width="1908" height="195" alt="image" src="https://github.com/user-attachments/assets/7576bd2b-3b38-478c-ba00-274ffa2b37e6" />## Urban Vision AI
 
 **AI-assisted Urban Infrastructure Audit & Restoration Tool**
 
@@ -51,3 +51,5 @@ The project demonstrates how AI can assist urban planners, civic bodies, and arc
 ```bash
 >> pip install -r requirements.txt involving flask, google-genai, python-dotenv, pillow
 >> python app.py
+Note:
+Early development included a placeholder config file which has since been removed. All sensitive keys were revoked.
